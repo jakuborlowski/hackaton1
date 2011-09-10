@@ -30,4 +30,15 @@ public class Castle extends Model {
 	{
 		return this.storage.get(resourceID);
 	}
+	
+	public Castle addConstruction(String resourceID, int amount)
+	{
+		this.construction.put(resourceID, amount + this.construction.get(resourceID));
+		return this;
+	}
+	
+	public int countConstruction(String resourceID)
+	{
+		return this.construction.get(resourceID);
+	}
 }
