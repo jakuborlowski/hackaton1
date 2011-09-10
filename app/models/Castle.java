@@ -8,59 +8,36 @@ import play.db.jpa.*;
 @Entity
 public class Castle extends Model {
 	
-	public HashMap<String, Integer> storage;
-	public HashMap<String, Integer> construction;
+	public HashMap<String, Integer> resources;
 	
 	@OneToMany
 	public List<Card> cards;
 	
-	public Castle(HashMap storage, HashMap construction)
+	public Castle(HashMap resources)
 	{
-		this.storage = storage;
-		this.construction = construction;
+		this.resources = resources;
 	}
 	
-	public Castle addStorage(String resourceID, int amount)
+	public Castle addResource(String resourceID, int amount)
 	{
-		this.storage.put(resourceID, amount + this.countStorage(resourceID));
+		this.resources.put(resourceID, amount + this.countResource(resourceID));
 		return this;
 	}
 	
-	public Castle removeStorage(String resourceID, int amount)
+	public Castle removeResource(String resourceID, int amount)
 	{
-		this.addStorage(resourceID, amount*-1);
+		this.addResource(resourceID, amount*-1);
 		return this;
 	}
 	
-	public int countStorage(String resourceID)
+	public int countResource(String resourceID)
 	{
-		if (!this.storage.containsKey(resourceID))
+		if (!this.resources.containsKey(resourceID))
 		{
 			return 0;
 		}
 		
-		return this.storage.get(resourceID);
+		return this.resources.get(resourceID);
 	}
 	
-	public Castle addConstruction(String resourceID, int amount)
-	{
-		this.construction.put(resourceID, amount + this.countConstruction(resourceID));
-		return this;
-	}
-	
-	public Castle removeConstruction(String resourceID, int amount)
-	{
-		this.addConstruction(resourceID, amount*-1);
-		return this;
-	}
-	
-	public int countConstruction(String resourceID)
-	{
-		if (!this.construction.containsKey(resourceID))
-		{
-			return 0;
-		}
-		
-		return this.construction.get(resourceID);
-	}
 }

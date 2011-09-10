@@ -14,30 +14,28 @@ public class CastleTest extends UnitTest {
 
 		HashMap<String, Integer> storage = new HashMap();
 		storage.put(coal.resourceID, 10);
+		storage.put(health.resourceID, 100);
 
-		HashMap<String, Integer> construction = new HashMap();
-		construction.put(health.resourceID, 100);
+		Castle cast1 = new Castle(storage);
 
-		Castle cast1 = new Castle(storage, construction);
+		assertEquals(10, cast1.countResource(coal.resourceID));
+		assertEquals(100, cast1.countResource(health.resourceID));
 
-		assertEquals(10, cast1.countStorage(coal.resourceID));
-		assertEquals(100, cast1.countConstruction(health.resourceID));
+		cast1.addResource(coal.resourceID, 5);
 
-		cast1.addStorage(coal.resourceID, 5);
+		assertEquals(15, cast1.countResource(coal.resourceID));
 
-		assertEquals(15, cast1.countStorage(coal.resourceID));
+		cast1.addResource(health.resourceID, 10);
 
-		cast1.addConstruction(health.resourceID, 10);
-
-		assertEquals(110, cast1.countConstruction(health.resourceID));
+		assertEquals(110, cast1.countResource(health.resourceID));
 		
-		cast1.removeStorage(coal.resourceID, 5);
+		cast1.removeResource(coal.resourceID, 5);
 		
-		assertEquals(10, cast1.countStorage(coal.resourceID));
+		assertEquals(10, cast1.countResource(coal.resourceID));
 		
-		cast1.removeConstruction(health.resourceID, 10);
+		cast1.removeResource(health.resourceID, 10);
 		
-		assertEquals(100, cast1.countConstruction(health.resourceID));
+		assertEquals(100, cast1.countResource(health.resourceID));
 
 	}
 }
