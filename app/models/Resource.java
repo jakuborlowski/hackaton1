@@ -27,6 +27,7 @@ public class Resource extends Model {
     
     public void update(Castle castle, int amount) {
         
+        
     }
     
 }

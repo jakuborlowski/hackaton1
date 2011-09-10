@@ -36,6 +36,12 @@ public class CastleTest extends UnitTest {
         cast1.removeResource(health.resourceID, 10);
 
         assertEquals(100, cast1.countResource(health.resourceID));
+        
+        int howMany = cast1.removeResource(coal.resourceID, 20);
+        
+        assertEquals(10, howMany);
+        
+        assertEquals(0, cast1.countResource(coal.resourceID));
 
     }
 }

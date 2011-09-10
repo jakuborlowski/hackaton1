@@ -25,14 +25,18 @@ public class Castle extends Model {
         this.enemyCastle = enemyCastle;
     }
 
-    public Castle addResource(String resourceID, int amount) {
+    public int addResource(String resourceID, int amount) {
         this.resources.put(resourceID, amount + this.countResource(resourceID));
-        return this;
+        return this.countResource(resourceID);
     }
 
-    public Castle removeResource(String resourceID, int amount) {
-        this.addResource(resourceID, amount * -1);
-        return this;
+    public int removeResource(String resourceID, int amount) {
+        int current = this.countResource(resourceID);
+        
+        int transferable = Math.min(current, amount);
+        this.addResource(resourceID, transferable * -1);
+        
+        return transferable;
     }
 
     public int countResource(String resourceID) {
