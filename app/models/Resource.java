@@ -1,6 +1,7 @@
 package models;
 
 import java.util.*;
+
 import javax.persistence.*;
 
 import play.db.jpa.*;
@@ -9,7 +10,7 @@ import play.db.jpa.*;
 public class Resource extends Model {
     
 	@OneToMany
-    public List<Change> changes;
+    public List<Change> changes = new ArrayList<Change>();
 	
     public String resourceID;
     public String name;
