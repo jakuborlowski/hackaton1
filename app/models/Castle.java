@@ -25,4 +25,9 @@ public class Castle extends Model {
 		this.storage.put(resourceID, amount + this.storage.get(resourceID));
 		return this;
 	}
+	
+	public int countStorage(String resourceID)
+	{
+		return this.storage.get(resourceID);
+	}
 }
