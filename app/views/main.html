@@ -3,14 +3,28 @@
 <html>
     <head>
         <title>#{get 'title' /}</title>
-        <meta charset="${_response_encoding}">
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+        <meta http-equiv="Content-Type" content="text/html; charset=${_response_encoding}">
+        <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/main.css'}">
         #{get 'moreStyles' /}
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
-        <script src="@{'/public/javascripts/jquery-1.5.2.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        <script src="@{'/public/javascripts/jquery-1.5.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        <script src="@{'/public/javascripts/templating.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        <script src="@{'/public/javascripts/jquery.scrollTo-min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
         #{get 'moreScripts' /}
     </head>
     <body>
+        
+        <div class="user-info">
+            <ul>
+                <li class="info">Zalogowany jako: lukasz.stefaniak@gmail.com</li>
+                <li class="chat-button js-chat-button">Users chat</li>
+            </ul>
+        </div>
+        
+        <div class="js-chat chat">dj</div>
+        
+        #{extends 'template.html' /}
+        
         #{doLayout /}
     </body>
 </html>
