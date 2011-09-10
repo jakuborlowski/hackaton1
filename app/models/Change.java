@@ -7,59 +7,57 @@ import play.db.jpa.*;
 @Entity
 public class Change extends Model {
 
-	public String resourceID;
+    public String resourceID;
+    public Castle.Target target;
+    public Operations operation;
+    public Double amount;
 
-	public Castle.Target target;
-	public Operations operation;
-	public Double amount;
+    public Change(String resourceID, Operations operation, Double amount,
+            Castle.Target target) {
 
-	public Change(String resourceID, Operations operation, Double amount,
-			Castle.Target target) {
+        this.resourceID = resourceID;
+        this.operation = operation;
+        this.amount = amount;
+        this.target = target;
 
-		this.resourceID = resourceID;
-		this.operation = operation;
-		this.amount = amount;
-		this.target = target;
+    }
 
-	}
+    public boolean isPossible() {
+        return true;
+    }
 
-	public boolean isPossible() {
-		return true;
-	}
+    public void apply(Castle castle) {
+        if (this.operation.equals(Operations.ADD)) {
+            this.executeAdd(castle);
+        } else if (this.operation.equals(Operations.REMOVE)) {
+            this.executeRemove(castle);
+        }
+        // TODO: Transfer, Multiply
+    }
 
-	public void apply(Castle castle) {
-		if (this.operation.equals("Add")) {
-			this.executeAdd(castle);
-		} else if (this.operation.equals("Remove")) {
-			this.executeRemove(castle);
-		}
-		// TODO: Transfer, Multiply
-	}
+    public void executeAdd(Castle castle) {
 
-	public void executeAdd(Castle castle) {
+        this.getTargetCastle(castle).addResource(this.resourceID,
+                this.amount.intValue());
 
-		this.getTargetCastle(castle).addResource(this.resourceID,
-				this.amount.intValue());
+    }
 
-	}
+    public void executeRemove(Castle castle) {
 
-	public void executeRemove(Castle castle) {
+        this.getTargetCastle(castle).removeResource(this.resourceID,
+                this.amount.intValue());
 
-		this.getTargetCastle(castle).removeResource(this.resourceID,
-				this.amount.intValue());
+    }
 
-	}
+    public Castle getTargetCastle(Castle castle) {
 
-	public Castle getTargetCastle(Castle castle) {
+        switch (this.target) {
+            case ENEMY:
+                return castle.getEnemyCastle();
+            case ME:
+            default:
+                return castle;
+        }
 
-		switch (this.target) {
-		case ENEMY:
-			return castle.getEnemyCastle();
-		case ME:
-		default:
-			return castle;
-		}
-
-	}
-
+    }
 }
