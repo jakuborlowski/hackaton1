@@ -1,8 +1,139 @@
-html, body {
-    background: #ddd;
-    padding: 0;
+html, body
+{
     margin: 0;
-    font-family: Helvetica, Arial, Sans;
+    padding: 0;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 13px;
+}
+
+.user-info
+{
+    width: 100%;
+    background: #292c29;
+    position: fixed;
+    margin: 0;
+    padding: 0;
+    color: #efefef;
+    font-size: 12px;
+}
+
+.user-info ul
+{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.user-info ul li.info
+{
+    float: left;
+    padding: 10px;
+}
+
+.user-info ul li.chat-button
+{
+    margin: 0;
+    padding: 10px;
+    float: right;
+    width: 130px;
+    background: #595959;
+    text-align: center;
+    cursor: pointer;
+}
+
+.chat
+{
+    width: 100%;
+    height: 500px;
+    background-color: #595959;
+    position: absolute;
+    top: 35px;
+    z-index: 1000;
+    display: none;
+}
+
+.container
+{
+    width: 1000px;
+    margin: 0 auto;
+    padding: 70px 0;
+}
+
+.left-col
+{
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 500px;
+}
+
+.right-col
+{
+    float: right;
+    margin: 0;
+    padding: 0;
+    width: 500px;
+}
+
+.castle
+{
+    width: 400px;
+    height: 300px;
+    background: #ff0000;
+}
+
+.attributes
+{
+    margin: 0;
+    padding: 0;
+    width: 400px;
+}
+
+.attributes ul
+{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.attributes ul li
+{
+    display: block;
+    padding: 10px;
+    background: #efefef;
+    border-top: 1px solid #cccccc;
+}
+
+.attributes ul li:last-child
+{
+    border-bottom: 1px solid #cccccc; 
+}
+
+.user-ui
+{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 260px;
+    background: #00ff00;
+}
+
+.user-ui ul
+{
+    margin: 0;
+    padding: 15px;
+    list-style: none;
+}
+
+.card
+{
+    width: 180px;
+    height: 200px;
+    background: #292929;
+    border: 5px solid #eeeeee;
+    float: left;
+    margin: 0 10px;
+    padding: 10px;
 }
 
 #home {
