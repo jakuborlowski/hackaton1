@@ -8,6 +8,10 @@ import play.db.jpa.*;
 @Entity
 public class Castle extends Model {
 
+    public enum Target {
+
+        ME, ENEMY
+    }
     public HashMap<String, Integer> resources;
     @OneToMany
     public List<Card> cards;

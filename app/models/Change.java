@@ -8,15 +8,12 @@ import play.db.jpa.*;
 public class Change extends Model {
 
     public String resourceID;
-    /**
-     * 0 - my castle
-     * 1 - enemy castle
-     */
-    public int target;
-    public String operation;
+    public Castle.Target target;
+    public Operations operation;
     public Double amount;
 
-    public Change(String resourceID, String operation, Double amount, int target) {
+    public Change(String resourceID, Operations operation, Double amount,
+            Castle.Target target) {
 
         this.resourceID = resourceID;
         this.operation = operation;
@@ -30,9 +27,9 @@ public class Change extends Model {
     }
 
     public void apply(Castle castle) {
-        if (this.operation.equals("Add")) {
+        if (this.operation.equals(Operations.ADD)) {
             this.executeAdd(castle);
-        } else if (this.operation.equals("Remove")) {
+        } else if (this.operation.equals(Operations.REMOVE)) {
             this.executeRemove(castle);
         }
         // TODO: Transfer, Multiply
@@ -40,22 +37,24 @@ public class Change extends Model {
 
     public void executeAdd(Castle castle) {
 
-        this.getTargetCastle(castle).addResource(this.resourceID, this.amount.intValue());
+        this.getTargetCastle(castle).addResource(this.resourceID,
+                this.amount.intValue());
 
     }
 
     public void executeRemove(Castle castle) {
 
-        this.getTargetCastle(castle).removeResource(this.resourceID, this.amount.intValue());
+        this.getTargetCastle(castle).removeResource(this.resourceID,
+                this.amount.intValue());
 
     }
 
     public Castle getTargetCastle(Castle castle) {
 
         switch (this.target) {
-            case 1:
+            case ENEMY:
                 return castle.getEnemyCastle();
-            case 0:
+            case ME:
             default:
                 return castle;
         }
