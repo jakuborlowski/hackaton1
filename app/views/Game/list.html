@@ -1,4 +1,12 @@
 #{extends 'game.html' /}
 #{set roomId:'lobby' /}
 
-Lista gier
+<h2>Lista wolnych pokoi:</h2>
+
+<ul>
+#{list items:rooms, as:'room'}
+    <ul><a href="@@{Game.play(room.getRoomId())}"><span class="">test</span></a></ul>
+#{/list}
+</ul>
+<h2>Nie znalazłeś nic dla siebie?</h2>
+<a href="@@{Game.newGame}">Rozpocznij nową grę</a>

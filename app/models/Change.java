@@ -7,7 +7,7 @@ import play.db.jpa.*;
 @Entity
 public class Change extends Model {
 
-	public String resourceID;
+	public String resourceId;
 
 	public Castle.Target target;
 	public Operations operation;
@@ -16,7 +16,7 @@ public class Change extends Model {
 	public Change(String resourceID, Operations operation, Double amount,
 			Castle.Target target) {
 
-		this.resourceID = resourceID;
+		this.resourceId = resourceID;
 		this.operation = operation;
 		this.amount = amount;
 		this.target = target;
@@ -38,14 +38,14 @@ public class Change extends Model {
 
 	public void executeAdd(Castle castle) {
 
-		this.getTargetCastle(castle).addResource(this.resourceID,
+		this.getTargetCastle(castle).addResource(this.resourceId,
 				this.amount.intValue());
 
 	}
 
 	public void executeRemove(Castle castle) {
 
-		this.getTargetCastle(castle).removeResource(this.resourceID,
+		this.getTargetCastle(castle).removeResource(this.resourceId,
 				this.amount.intValue());
 
 	}

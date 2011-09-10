@@ -40,25 +40,34 @@ public class Game extends Controller {
 	}
 
 	public static void list() {
-		
-		Resource res = new Resource("test", "Nazwa", false, false);
-		
-		Change change = new Change("cegły", Operations.ADD, 1.0, Castle.Target.ME);
-		
-		res.changes.add(change);
-		
-		
+		renderArgs.put("rooms", GameRooms.getOpenRooms());
+
 		render();
 	}
+	
+	public static void newGame()
+	{
+		GameRoom newRoom = GameRooms.startNewGame(getUser());
+		if(newRoom == null)
+		{
+			render("404");
+		}
+		play(newRoom.getRoomId());
+	}
+	
 
 	public static class GameSocket extends WebSocketController {
 
 		public static void join(String roomId) {
 
-			GameRoom room = GameRoom.get(roomId);
-			
+			GameRoom room = GameRooms.get(roomId);
+
+			if (room == null) {
+				outbound.send("quit:noroom");
+				disconnect();
+			}
+
 			User user = getUser();
-			
 
 			// Socket connected, join the game room
 			EventStream<GameRoom.Event> roomMessagesStream = room

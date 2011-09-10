@@ -10,7 +10,7 @@ GET		/logout									UserActions.logout
 POST	/doRegister								UserActions.doRegister
 POST	/doLogin								UserActions.doLogin
 
-# WebSocket demo
+GET     /game/newGame                         Game.newGame
 GET     /game/play                         Game.play
 WS      /game/play/socket                  Game.GameSocket.join    
 

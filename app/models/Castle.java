@@ -27,22 +27,22 @@ public class Castle extends Model {
 		this.enemyCastle = enemyCastle;
 	}
 
-	public Castle addResource(String resourceID, int amount) {
-		this.resources.put(resourceID, amount + this.countResource(resourceID));
+	public Castle addResource(String resourceId, int amount) {
+		this.resources.put(resourceId, amount + this.countResource(resourceId));
 		return this;
 	}
 
-	public Castle removeResource(String resourceID, int amount) {
-		this.addResource(resourceID, amount * -1);
+	public Castle removeResource(String resourceId, int amount) {
+		this.addResource(resourceId, amount * -1);
 		return this;
 	}
 
-	public int countResource(String resourceID) {
-		if (!this.resources.containsKey(resourceID)) {
+	public int countResource(String resourceId) {
+		if (!this.resources.containsKey(resourceId)) {
 			return 0;
 		}
 
-		return this.resources.get(resourceID);
+		return this.resources.get(resourceId);
 	}
 
 	public Castle getEnemyCastle() {

@@ -8,14 +8,14 @@ import play.db.jpa.*;
 @Entity
 public class Card extends Model {
 
-//	@OneToMany
-//    public List<Change> required;
-//	@OneToMany
-//    public List<Change> operations;
+	@OneToMany
+	public List<Change> required;
+	@OneToMany
+	public List<Change> operations;
 
-    public boolean isPossible() {
+	public boolean isPossible() {
 
-        return true;
+		return true;
 
-    }
+	}
 }
