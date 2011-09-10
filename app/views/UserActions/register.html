@@ -1,0 +1,39 @@
+#{extends 'main.html' /}
+
+<h1>Zarejestruj się</h1>
+
+#{form @UserActions.doRegister()}
+	#{ifErrors}
+	<ul>
+	  #{list items:errors, as:'error'}
+      <li class="error">
+			${error}
+      </li>
+	  #{/list}
+	</ul>
+    #{/ifErrors}
+	
+	<label for="email">E-mail</label>
+	<input id="email" type="text" name="email" />
+	
+	<label for="password">Hasło</label>
+	<input id="password" type="password" name="password" />
+	
+	<label for="confirm">potwierdź hasło</label>
+	<input id="confirm" type="password" />
+	<p class="different" style="display:none">podane hasła różnią się</p>
+	
+	<input type="submit" value="Zarejestruj" id="newUserSubmit" />
+#{/form}
+
+<script type="text/javascript">
+	$('form[0]').submit(function() {
+		if ($('#password').val() != $('#confirm').val()) {
+			$('.different').show();
+			return false;
+		} else {
+			$('.different').hide();
+		}
+		return true;
+	});
+</script>

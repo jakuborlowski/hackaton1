@@ -1,2 +1,3 @@
-nbproject
-tmp
+/nbproject
+/tmp
+/test-result
