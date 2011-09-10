@@ -1,0 +1,28 @@
+
+#{selenium}
+    open('/register')
+    type('id=email', 'sakowski.mariusz@gmail.com')
+	type('id=password', 'abc')
+	type('id=confirm', 'cde')
+	click('id=newUserSubmit')
+	assertTextPresent('podane hasła różnią się')
+	
+	type('id=confirm', 'abc')
+	clickAndWait('id=newUserSubmit')
+	
+	open('/register')
+    type('id=email', 'sakowski.mariusz@gmail.com')
+	type('id=password', 'abc')
+	type('id=confirm', 'abc')
+	clickAndWait('id=newUserSubmit')
+	assertTextPresent('email jest już użyty')
+	
+	open('/login')
+	type('id=email', 'sakowski.mariusz@gmail.com')
+	type('id=plainPassword', 'cde')
+	clickAndWait('id=signin')
+	assertTextPresent('błędny login lub hasło')
+	
+	type('id=plainPassword', 'abc')
+	clickAndWait('id=signin')	
+#{/selenium}

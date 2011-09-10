@@ -4,6 +4,9 @@
 
 # Login
 GET     /                                       Application.index
+GET		/register								UserActions.newUser
+GET		/login									UserActions.login
+GET		/logout									UserActions.logout
 
 # WebSocket demo
 GET     /game/play                         Game.play
