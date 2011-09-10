@@ -2,7 +2,7 @@
 
 <h1>Zarejestruj się</h1>
 
-<form action="@{UserActions.register}" method="POST" id="registerUserForm">
+#{form @UserActions.doRegister()}
 	#{ifErrors}
 	<ul>
 	  #{list items:errors, as:'error'}
@@ -24,10 +24,10 @@
 	<p class="different" style="display:none">podane hasła różnią się</p>
 	
 	<input type="submit" value="Zarejestruj" id="newUserSubmit" />
-</form>
+#{/form}
 
 <script type="text/javascript">
-	$('#registerUserForm').submit(function() {
+	$('form[0]').submit(function() {
 		if ($('#password').val() != $('#confirm').val()) {
 			$('.different').show();
 			return false;

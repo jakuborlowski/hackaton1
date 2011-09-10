@@ -1,8 +1,7 @@
 package models;
 
-import javax.persistence.Entity;
-import play.data.validation.Email;
-import play.data.validation.Required;
+import javax.persistence.*;
+import play.data.validation.*;
 import play.db.jpa.Model;
 import play.libs.Crypto;
 

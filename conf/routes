@@ -3,10 +3,12 @@
 # ~~~~
 
 # Login
-GET     /                                       Application.index
-GET		/register								UserActions.newUser
+GET     /                                       Game.list
+GET		/register								UserActions.register
 GET		/login									UserActions.login
 GET		/logout									UserActions.logout
+POST	/doRegister								UserActions.doRegister
+POST	/doLogin								UserActions.doLogin
 
 # WebSocket demo
 GET     /game/play                         Game.play

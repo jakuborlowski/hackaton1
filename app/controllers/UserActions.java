@@ -13,13 +13,9 @@ import play.libs.Crypto;
 
 public class UserActions extends Controller {
 	
-	public static void newUser() {
-		render();
-	}
-	
 	public static void logout() {
 		session.remove("uid");
-		Application.index();
+		UserActions.login();
 	}
 	
 	public static void login() {
@@ -34,8 +30,8 @@ public class UserActions extends Controller {
 			User user = User.find("byEmailAndPassword", email, Crypto.passwordHash(plainPassword)).first();
 			
 			if (user != null) {
-				session.put("uid", user.id);
-				Application.index();
+				session.put("uid", user.email);
+				Game.list();
 			} else {
 				Validation.addError("email", "błędny login lub hasło");
 			}
@@ -46,7 +42,11 @@ public class UserActions extends Controller {
 		login();		
 	}			 
 	
-	public static void register(
+	public static void register() {
+		render();
+	}
+	
+	public static void doRegister(
 			@Required(message="Wymagany e-mail") @Email(message="Błędny e-mail") String email,
 			@Required(message="Wymagane hasło") String password
 		) throws Exception {
@@ -58,13 +58,13 @@ public class UserActions extends Controller {
 		if (Validation.hasErrors()) {
 			params.flash();
 			Validation.keep();
-			newUser();
+			register();
 		}
 		
 		User newUser = new User(email, password);
 		newUser.save();
 		
-		Application.index();
+		UserActions.login();
 	}
 	
 }
