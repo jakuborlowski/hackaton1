@@ -26,6 +26,12 @@ public class Castle extends Model {
 		return this;
 	}
 	
+	public Castle removeStorage(String resourceID, int amount)
+	{
+		this.addStorage(resourceID, amount*-1);
+		return this;
+	}
+	
 	public int countStorage(String resourceID)
 	{
 		if (!this.storage.containsKey(resourceID))
@@ -39,6 +45,12 @@ public class Castle extends Model {
 	public Castle addConstruction(String resourceID, int amount)
 	{
 		this.construction.put(resourceID, amount + this.countConstruction(resourceID));
+		return this;
+	}
+	
+	public Castle removeConstruction(String resourceID, int amount)
+	{
+		this.addConstruction(resourceID, amount*-1);
 		return this;
 	}
 	

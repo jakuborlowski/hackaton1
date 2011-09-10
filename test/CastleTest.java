@@ -30,6 +30,14 @@ public class CastleTest extends UnitTest {
 		cast1.addConstruction(health.resourceID, 10);
 
 		assertEquals(110, cast1.countConstruction(health.resourceID));
+		
+		cast1.removeStorage(coal.resourceID, 5);
+		
+		assertEquals(10, cast1.countStorage(coal.resourceID));
+		
+		cast1.removeConstruction(health.resourceID, 10);
+		
+		assertEquals(100, cast1.countConstruction(health.resourceID));
 
 	}
 }
