@@ -44,12 +44,12 @@ public class Game extends Controller {
 
     public static class GameSocket extends WebSocketController {
         
-        public static void join(String user, String roomId) {
+        public static void join(String roomId) {
             
             GameRoom room = GameRoom.get(roomId);
             
             // Socket connected, join the game room
-            EventStream<GameRoom.Event> roomMessagesStream = room.join(user);
+            EventStream<GameRoom.Event> roomMessagesStream = room.join(user.email);
          
             // Loop while the socket is open
             while(inbound.isOpen()) {
@@ -62,14 +62,14 @@ public class Game extends Controller {
                 
                 // Case: User typed 'quit'
                 for(String userMessage: TextFrame.and(Equals("quit")).match(e._1)) {
-                    room.leave(user);
+                    room.leave(user.email);
                     outbound.send("quit:ok");
                     disconnect();
                 }
                 
                 // Case: TextEvent received on the socket
                 for(String userMessage: TextFrame.match(e._1)) {
-                    room.say(user, userMessage);
+                    room.say(user.email, userMessage);
                 }
                 
                 // Case: Someone joined the room
@@ -89,7 +89,7 @@ public class Game extends Controller {
                 
                 // Case: The socket has been closed
                 for(WebSocketClose closed: SocketClosed.match(e._1)) {
-                    room.leave(user);
+                    room.leave(user.email);
                     disconnect();
                 }
                 
