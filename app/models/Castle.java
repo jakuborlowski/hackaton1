@@ -8,26 +8,46 @@ import play.db.jpa.*;
 @Entity
 public class Castle extends Model {
 	
-	public HashMap<String, Integer> storage;
-	public HashMap<String, Integer> construction;
+	public HashMap<String, Integer> resources;
 	
 	@OneToMany
 	public List<Card> cards;
-	
-	public Castle(HashMap storage, HashMap construction)
+        
+        public Castle enemyCastle;
+        
+	public Castle(HashMap resources)
 	{
-		this.storage = storage;
-		this.construction = construction;
+		this.resources = resources;
 	}
+        
+        public void setEnemyCastle(Castle enemyCastle) {
+            this.enemyCastle = enemyCastle;
+        }
 	
-	public Castle addStorage(String resourceID, int amount)
+	public Castle addResource(String resourceID, int amount)
 	{
-		this.storage.put(resourceID, amount + this.storage.get(resourceID));
+		this.resources.put(resourceID, amount + this.countResource(resourceID));
 		return this;
 	}
 	
-	public int countStorage(String resourceID)
+	public Castle removeResource(String resourceID, int amount)
 	{
-		return this.storage.get(resourceID);
+		this.addResource(resourceID, amount*-1);
+		return this;
 	}
+	
+	public int countResource(String resourceID)
+	{
+		if (!this.resources.containsKey(resourceID))
+		{
+			return 0;
+		}
+		
+		return this.resources.get(resourceID);
+	}
+        
+        public Castle getEnemyCastle() {
+            return this.enemyCastle;
+        }
+	
 }
