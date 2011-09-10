@@ -17,9 +17,30 @@ import models.*;
 
 public class Game extends Controller {
     
-    public static void play(@Required String user) {
-        render(user);
+	public static User user;
+	
+	@Before
+	public static void setup()
+	{
+		if (!session.contains("uid")) {
+			UserActions.login();
+		}
+		
+		user = User.find("byEmail", session.get("uid")).first();
+		if (user == null) {
+			UserActions.login();
+		}
+		
+		renderArgs.put("user", user);
+	}
+	
+    public static void play(@Required String roomId) {
+        render(roomId);
     }
+	
+	public static void list() {		
+		render();
+	}
 
     public static class GameSocket extends WebSocketController {
         

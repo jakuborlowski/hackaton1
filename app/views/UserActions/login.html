@@ -1,0 +1,23 @@
+#{extends 'main.html' /}
+
+<h1>Zaloguj się</h1>
+
+<form action="@{UserActions.doLogin}" method="POST" id="loginForm">
+	#{ifErrors}
+	<ul>
+	  #{list items:errors, as:'error'}
+      <li class="error">
+			${error}
+      </li>
+	  #{/list}
+	</ul>
+    #{/ifErrors}
+	
+	<label for="email">E-mail</label>
+	<input id="email" type="text" name="email" />
+	
+	<label for="password">Hasło</label>
+	<input id="plainPassword" type="password" name="plainPassword" />
+	
+	<input type="submit" value="Zaloguj się" id="signin" />
+</form>
