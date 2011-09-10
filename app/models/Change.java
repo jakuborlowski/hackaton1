@@ -1,16 +1,22 @@
 package models;
 
+import java.util.*;
 import javax.persistence.*;
 
 import play.db.jpa.*;
 
 @Entity
+@Table(name="_change")
 public class Change extends Model {
 
 	public String resourceID;
 
+	@Enumerated(value = EnumType.STRING)
 	public Castle.Target target;
+	
+	@Enumerated(value = EnumType.STRING)
 	public Operations operation;
+	
 	public Double amount;
 
 	public Change(String resourceID, Operations operation, Double amount,

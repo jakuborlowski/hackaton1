@@ -2,3 +2,55 @@
 User(sakfa):
   email: sakowski.mariusz@gmail.com
   password: abc
+  
+Change(stworz_cegle):
+  resourceID: "brick"
+  operation: ADD
+  target: ME
+  amount: 1
+Change(stworz_mana):
+  resourceID: "mana"
+  operation: ADD
+  target: ME
+  amount: 1
+Change(stworz_bron):
+  resourceID: "weapon"
+  operation: ADD
+  target: ME
+  amount: 1
+
+  
+Resource(cegla):
+  resourceID: "brick"
+  name: "Cegły"
+  isTransferable: true
+  isStoreable: true
+Resource(budowniczy):
+  resourceID: "builder"
+  name: "Budowniczy"
+  isTransferable: false
+  isStoreable: true
+  changes: [ stworz_cegle ]
+Resource(mana):
+  resourceID: "mana"
+  name: "Mana"
+  isTransferable: true
+  isStoreable: true
+Resource(czarownik):
+  resourceID: "wizard"
+  name: "Czarownik"
+  isTransferable: false
+  isStoreable: true
+  changes: [ stworz_mana ]
+Resource(bron):
+  resourceID: "weapon"
+  name: "Broń"
+  isTransferable: true
+  isStoreable: true
+Resource(platnerz):
+  resourceID: "armorer"
+  name: "Płatnerz"
+  isTransferable: false
+  isStoreable: true
+  changes: [ stworz_bron ]
+  

@@ -9,7 +9,7 @@ import play.db.jpa.*;
 public class Castle extends Model {
 
 	public enum Target {
-		ME, ENEMY
+		ME, ENEMY		
 	}
 
 	public HashMap<String, Integer> resources;
