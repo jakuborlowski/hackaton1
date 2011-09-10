@@ -23,6 +23,13 @@
 	clickAndWait('id=signin')
 	assertTextPresent('błędny login lub hasło')
 	
+	type('id=email', 'sakowski.mariusz@gmail.com')
 	type('id=plainPassword', 'abc')
-	clickAndWait('id=signin')	
+	clickAndWait('id=signin')
+	
+	assertTextPresent('Zalogowany jako: sakowski.mariusz@gmail.com')
+	
+	clickAndWait('id=logoutButton')
+	
+	assertTextNotPresent('Zalogowany jako: sakowski.mariusz@gmail.com')
 #{/selenium}
