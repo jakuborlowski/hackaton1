@@ -48,5 +48,4 @@ public class Castle extends Model {
 	public Castle getEnemyCastle() {
 		return this.enemyCastle;
 	}
-
 }
