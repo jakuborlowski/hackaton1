@@ -9,12 +9,14 @@ import play.db.jpa.*;
 public class Castle extends Model {
 
     public enum Target {
-
-        ME, ENEMY
+        ME, ENEMY       
     }
+
     public HashMap<String, Integer> resources;
+
     @OneToMany
     public List<Card> cards;
+
     public Castle enemyCastle;
 
     public Castle(HashMap resources) {
@@ -39,12 +41,12 @@ public class Castle extends Model {
         return transferable;
     }
 
-    public int countResource(String resourceID) {
-        if (!this.resources.containsKey(resourceID)) {
+    public int countResource(String resourceId) {
+        if (!this.resources.containsKey(resourceId)) {
             return 0;
         }
 
-        return this.resources.get(resourceID);
+        return this.resources.get(resourceId);
     }
 
     public Castle getEnemyCastle() {

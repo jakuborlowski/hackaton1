@@ -1,21 +1,27 @@
 package models;
 
+import java.util.*;
 import javax.persistence.*;
 
 import play.db.jpa.*;
 
 @Entity
+@Table(name = "_change")
 public class Change extends Model {
 
-    public String resourceID;
-    public Castle.Target target;
-    public Operations operation;
+    public String resourceId;
     public Double amount;
 
-    public Change(String resourceID, Operations operation, Double amount,
+    @Enumerated(value = EnumType.STRING)
+    public Castle.Target target;
+
+    @Enumerated(value = EnumType.STRING)
+    public Operations operation;
+
+    public Change(String resourceId, Operations operation, Double amount,
             Castle.Target target) {
 
-        this.resourceID = resourceID;
+        this.resourceId = resourceId;
         this.operation = operation;
         this.amount = amount;
         this.target = target;
@@ -42,41 +48,39 @@ public class Change extends Model {
 
     public void executeAdd(Castle castle) {
 
-        this.getTargetCastle(castle).addResource(this.resourceID,
+        this.getTargetCastle(castle).addResource(this.resourceId,
                 this.amount.intValue());
-
     }
 
     public void executeRemove(Castle castle) {
 
-        this.getTargetCastle(castle).removeResource(this.resourceID,
+        this.getTargetCastle(castle).removeResource(this.resourceId,
                 this.amount.intValue());
-
     }
     
     public void executeMultiply(Castle castle) {
         
-        int from = this.getTargetCastle(castle).countResource(this.resourceID);
+        int from = this.getTargetCastle(castle).countResource(this.resourceId);
         int to = (int)(from*this.amount);
-        this.getTargetCastle(castle).addResource(this.resourceID, to-from);
+        this.getTargetCastle(castle).addResource(this.resourceId, to-from);
         
     }
     
     public void executeTransfer(Castle castle) {
                
-        int taken = this.getSourceCastle(castle).removeResource(this.resourceID, this.amount.intValue());
-        this.getTargetCastle(castle).addResource(this.resourceID, taken);
+        int taken = this.getSourceCastle(castle).removeResource(this.resourceId, this.amount.intValue());
+        this.getTargetCastle(castle).addResource(this.resourceId, taken);
         
     }
 
     public Castle getTargetCastle(Castle castle) {
 
         switch (this.target) {
-            case ENEMY:
-                return castle.getEnemyCastle();
-            case ME:
-            default:
-                return castle;
+        case ENEMY:
+            return castle.getEnemyCastle();
+        case ME:
+        default:
+            return castle;
         }
 
     }
