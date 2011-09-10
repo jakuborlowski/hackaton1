@@ -32,7 +32,12 @@ public class Change extends Model {
         } else if (this.operation.equals(Operations.REMOVE)) {
             this.executeRemove(castle);
         }
-        // TODO: Transfer, Multiply
+        else if (this.operation.equals(Operations.MULTIPLY)) {
+            this.executeMultiply(castle);
+        }
+        else if (this.operation.equals(Operations.TRANSFER)) {
+            this.executeTransfer(castle);
+        }
     }
 
     public void executeAdd(Castle castle) {
@@ -48,6 +53,21 @@ public class Change extends Model {
                 this.amount.intValue());
 
     }
+    
+    public void executeMultiply(Castle castle) {
+        
+        int from = this.getTargetCastle(castle).countResource(this.resourceID);
+        int to = (int)(from*this.amount);
+        this.getTargetCastle(castle).addResource(this.resourceID, to-from);
+        
+    }
+    
+    public void executeTransfer(Castle castle) {
+               
+        int taken = this.getSourceCastle(castle).removeResource(this.resourceID, this.amount.intValue());
+        this.getTargetCastle(castle).addResource(this.resourceID, taken);
+        
+    }
 
     public Castle getTargetCastle(Castle castle) {
 
@@ -55,6 +75,18 @@ public class Change extends Model {
             case ENEMY:
                 return castle.getEnemyCastle();
             case ME:
+            default:
+                return castle;
+        }
+
+    }
+    
+    public Castle getSourceCastle(Castle castle) {
+
+        switch (this.target) {
+            case ME:
+                return castle.getEnemyCastle();
+            case ENEMY:
             default:
                 return castle;
         }
