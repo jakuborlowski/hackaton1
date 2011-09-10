@@ -2,3 +2,160 @@
 User(sakfa):
   email: sakowski.mariusz@gmail.com
   password: abc
+  
+Change(stworz_cegle):
+  resourceID: "brick"
+  operation: ADD
+  target: ME
+  amount: 1
+Change(stworz_mana):
+  resourceID: "mana"
+  operation: ADD
+  target: ME
+  amount: 1
+Change(stworz_bron):
+  resourceID: "weapon"
+  operation: ADD
+  target: ME
+  amount: 1
+  
+Resource(cegla):
+  resourceID: "brick"
+  name: "Cegły"
+  isTransferable: true
+  isStoreable: true
+Resource(budowniczy):
+  resourceID: "builder"
+  name: "Budowniczy"
+  isTransferable: false
+  isStoreable: true
+  changes: [ stworz_cegle ]
+Resource(mana):
+  resourceID: "mana"
+  name: "Mana"
+  isTransferable: true
+  isStoreable: true
+Resource(czarownik):
+  resourceID: "wizard"
+  name: "Czarownik"
+  isTransferable: false
+  isStoreable: true
+  changes: [ stworz_mana ]
+Resource(bron):
+  resourceID: "weapon"
+  name: "Broń"
+  isTransferable: true
+  isStoreable: true
+Resource(platnerz):
+  resourceID: "armorer"
+  name: "Płatnerz"
+  isTransferable: false
+  isStoreable: true
+  changes: [ stworz_bron ]
+  
+Resource(zdrowie):
+  resourceID: "health"
+  name: "Punkty życia"
+  isTransferable: false
+  isStoreable: false
+  changes: [ ]
+Resource(zamek):
+  resourceID: "castle"
+  name: "Zamek"
+  isTransferable: false
+  isStoreable: false
+  changes: [ ]  
+Resource(plot):
+  resourceID: "fence"
+  name: "Płot"
+  isTransferable: false
+  isStoreable: false
+  changes: [ ]
+
+
+Change(atak_1):
+  resourceID: "health"
+  operation: REMOVE
+  target: ENEMY
+  amount: 1
+Change(bron_1):
+  resourceID: "weapon"
+  operation: REMOVE
+  target: ME
+  amount: 1
+Change(atak_3):
+  resourceID: "health"
+  operation: REMOVE
+  target: ENEMY
+  amount: 3
+Change(bron_3):
+  resourceID: "weapon"
+  operation: REMOVE
+  target: ME
+  amount: 3
+Change(atak_7):
+  resourceID: "health"
+  operation: REMOVE
+  target: ENEMY
+  amount: 7
+Change(bron_5):
+  resourceID: "weapon"
+  operation: REMOVE
+  target: ME
+  amount: 5
+Change(atak_11):
+  resourceID: "health"
+  operation: REMOVE
+  target: ENEMY
+  amount: 11
+Change(bron_8):
+  resourceID: "weapon"
+  operation: REMOVE
+  target: ME
+  amount: 8
+  
+Change(mana_1):
+  resourceID: "mana"
+  operation: REMOVE
+  target: ME
+  amount: 1
+Change(mana_3):
+  resourceID: "mana"
+  operation: REMOVE
+  target: ME
+  amount: 3
+Change(mana_5):
+  resourceID: "mana"
+  operation: REMOVE
+  target: ME
+  amount: 5
+Change(mana_8):
+  resourceID: "mana"
+  operation: REMOVE
+  target: ME
+  amount: 8
+  
+Card(karta_atak_1):
+  operations: [ atak_1 ]
+  required: [ bron_1 ]
+Card(karta_atak_3):
+  operations: [ atak_3 ]
+  required: [ bron_3 ]
+Card(karta_atak_7):
+  operations: [ atak_7 ]
+  required: [ bron_5 ]
+Card(karta_atak_11):
+  operations: [ atak_11 ]
+  required: [ bron_8 ]
+Card(karta_atak_magiczny_1):
+  operations: [ atak_1 ]
+  required: [ mana_1 ]
+Card(karta_atak_magiczny_3):
+  operations: [ atak_3 ]
+  required: [ mana_3 ]
+Card(karta_atak_magiczny_7):
+  operations: [ atak_7 ]
+  required: [ mana_5 ]
+Card(karta_atak_magiczny_11):
+  operations: [ atak_11 ]
+  required: [ mana_8 ]  

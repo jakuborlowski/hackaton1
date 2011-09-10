@@ -1,22 +1,27 @@
 package models;
 
+import java.util.*;
 import javax.persistence.*;
 
 import play.db.jpa.*;
 
 @Entity
+@Table(name = "_change")
 public class Change extends Model {
 
 	public String resourceId;
-
-	public Castle.Target target;
-	public Operations operation;
 	public Double amount;
 
-	public Change(String resourceID, Operations operation, Double amount,
+	@Enumerated(value = EnumType.STRING)
+	public Castle.Target target;
+
+	@Enumerated(value = EnumType.STRING)
+	public Operations operation;
+
+	public Change(String resourceId, Operations operation, Double amount,
 			Castle.Target target) {
 
-		this.resourceId = resourceID;
+		this.resourceId = resourceId;
 		this.operation = operation;
 		this.amount = amount;
 		this.target = target;
@@ -28,9 +33,9 @@ public class Change extends Model {
 	}
 
 	public void apply(Castle castle) {
-		if (this.operation.equals("Add")) {
+		if (this.operation.equals(Operations.ADD)) {
 			this.executeAdd(castle);
-		} else if (this.operation.equals("Remove")) {
+		} else if (this.operation.equals(Operations.REMOVE)) {
 			this.executeRemove(castle);
 		}
 		// TODO: Transfer, Multiply
@@ -40,14 +45,12 @@ public class Change extends Model {
 
 		this.getTargetCastle(castle).addResource(this.resourceId,
 				this.amount.intValue());
-
 	}
 
 	public void executeRemove(Castle castle) {
 
 		this.getTargetCastle(castle).removeResource(this.resourceId,
 				this.amount.intValue());
-
 	}
 
 	public Castle getTargetCastle(Castle castle) {
@@ -61,5 +64,4 @@ public class Change extends Model {
 		}
 
 	}
-
 }
