@@ -12,11 +12,17 @@ public class Castle extends Model {
 	
 	@OneToMany
 	public List<Card> cards;
-	
+        
+        public Castle enemyCastle;
+        
 	public Castle(HashMap resources)
 	{
 		this.resources = resources;
 	}
+        
+        public void setEnemyCastle(Castle enemyCastle) {
+            this.enemyCastle = enemyCastle;
+        }
 	
 	public Castle addResource(String resourceID, int amount)
 	{
@@ -39,5 +45,9 @@ public class Castle extends Model {
 		
 		return this.resources.get(resourceID);
 	}
+        
+        public Castle getEnemyCastle() {
+            return this.enemyCastle;
+        }
 	
 }
