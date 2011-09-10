@@ -22,23 +22,33 @@ public class Castle extends Model {
 	
 	public Castle addStorage(String resourceID, int amount)
 	{
-		this.storage.put(resourceID, amount + this.storage.get(resourceID));
+		this.storage.put(resourceID, amount + this.countStorage(resourceID));
 		return this;
 	}
 	
 	public int countStorage(String resourceID)
 	{
+		if (!this.storage.containsKey(resourceID))
+		{
+			return 0;
+		}
+		
 		return this.storage.get(resourceID);
 	}
 	
 	public Castle addConstruction(String resourceID, int amount)
 	{
-		this.construction.put(resourceID, amount + this.construction.get(resourceID));
+		this.construction.put(resourceID, amount + this.countConstruction(resourceID));
 		return this;
 	}
 	
 	public int countConstruction(String resourceID)
 	{
+		if (!this.construction.containsKey(resourceID))
+		{
+			return 0;
+		}
+		
 		return this.construction.get(resourceID);
 	}
 }
