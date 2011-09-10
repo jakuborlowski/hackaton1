@@ -8,7 +8,8 @@ import play.db.jpa.*;
 public class Change extends Model {
 	
 	public String resourceID;
-	public Castle target;
+	
+	//public Castle target;
 	public String operation;
 	public Double amount;
 	

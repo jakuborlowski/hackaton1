@@ -23,17 +23,17 @@ public class Game extends Controller {
 
     public static class GameSocket extends WebSocketController {
         
-        public static void join(String user) {
+        public static void join(String user, String roomId) {
             
-            GameRoom room = GameRoom.get();
+            GameRoom room = GameRoom.get(roomId);
             
-            // Socket connected, join the chat room
+            // Socket connected, join the game room
             EventStream<GameRoom.Event> roomMessagesStream = room.join(user);
          
             // Loop while the socket is open
             while(inbound.isOpen()) {
                 
-                // Wait for an event (either something coming on the inbound socket channel, or ChatRoom messages)
+                // Wait for an event (either something coming on the inbound socket channel, or GameRoom messages)
                 Either<WebSocketEvent,GameRoom.Event> e = await(Promise.waitEither(
                     inbound.nextEvent(), 
                     roomMessagesStream.nextEvent()
