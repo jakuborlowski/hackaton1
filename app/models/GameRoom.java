@@ -9,7 +9,13 @@ public class GameRoom {
     
     final ArchivedEventStream<GameRoom.Event> gameEvents = new ArchivedEventStream<GameRoom.Event>(100);
     
-    /**
+    String roomId = null;
+    
+    public GameRoom(String roomId) {
+		this.roomId = roomId;
+	}
+
+	/**
      * For WebSocket, when a user join the room we return a continuous event stream
      * of ChatEvent
      */
@@ -86,10 +92,15 @@ public class GameRoom {
     
     // ~~~~~~~~~ Chat room factory
 
-    static GameRoom instance = null;
-    public static GameRoom get() {
-        if(instance == null) {
-            instance = new GameRoom();
+    static Map<String, GameRoom> pool = new HashMap<String, GameRoom>();
+    
+    
+    public static GameRoom get(String roomId) {
+        GameRoom instance = pool.get(roomId);
+    	if(instance == null)
+    	{
+    		instance = new GameRoom(roomId);
+            pool.put(roomId, instance);
         }
         return instance;
     }

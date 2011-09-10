@@ -7,7 +7,8 @@ import play.db.jpa.*;
 
 @Entity
 public class Resource extends Model {
-    
+	
+	@OneToMany
     public List<Change> changes;
     public String resourceID;
     public String name;
