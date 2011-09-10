@@ -8,16 +8,26 @@ import play.db.jpa.*;
 @Entity
 public class Castle extends Model {
 	
-	
-	//public Map<String, Integer> storage;
-	//public Map<String, Integer> castle;
+	public HashMap<String, Integer> storage;
+	public HashMap<String, Integer> construction;
 	
 	@OneToMany
 	public List<Card> cards;
 	
-	public Castle()
+	public Castle(HashMap storage, HashMap construction)
 	{
-		//this.storage = new HashMap<String, Integer>();
-		//this.castle = new HashMap<String, Integer>();
+		this.storage = storage;
+		this.construction = construction;
+	}
+	
+	public Castle addStorage(String resourceID, int amount)
+	{
+		this.storage.put(resourceID, amount + this.storage.get(resourceID));
+		return this;
+	}
+	
+	public int countStorage(String resourceID)
+	{
+		return this.storage.get(resourceID);
 	}
 }
